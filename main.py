@@ -169,8 +169,9 @@ def upgma_clustering(feature_matrix, labels, colors, metric='cityblock', title='
         color = colors.get(text, 'gray')  # Default to gray if not found in colors mapping
         label.set_bbox(dict(facecolor=color, edgecolor='none', boxstyle='round,pad=0.5'))
 
-    # Remove y-axis labels (if desired)
-    ax.get_yaxis().set_visible(False)
+    ax.get_yaxis().set_visible(True)
+    plt.ylabel("Distance",rotation="270",labelpad=10)
+    ax.yaxis.set_tick_params(rotation=270)  # Rotate y-axis tick labels    
     
     # Finalize the plot
     if title:
@@ -258,67 +259,19 @@ padded_vectors = [np.pad(vec, (0, max_length - len(vec)), 'constant') for vec in
 feature_matrix = np.array(padded_vectors)
 print(feature_matrix.shape)
 # 创建标签数组
-label_gene_origin = {
-    'FJ217161': 'BDBV',
-    'KC545393': 'BDBV',
-    'KC545395': 'BDBV',
-    'KC545394': 'BDBV',
-    'KC545396': 'BDBV',
-    'FJ217162': 'TAFV',
-    'AF522874': 'RESTV',
-    'AB050936': 'RESTV',
-    'JX477166': 'RESTV',
-    'FJ621585': 'RESTV',
-    'FJ621583': 'RESTV',
-    'JX477165': 'RESTV',
-    'FJ968794': 'SUDV',
-    'KC242783': 'SUDV',
-    'EU338380': 'SUDV',
-    'AY729654': 'SUDV',
-    'JN638998': 'SUDV',
-    'KC545389': 'SUDV',
-    'KC545390': 'SUDV',
-    'KC545391': 'SUDV',
-    'KC545392': 'SUDV',
-    'KC589025': 'SUDV',
-    'KC242801': 'EBOV',
-    'NC_002549': 'EBOV',
-    'KC242791': 'EBOV',
-    'KC242792': 'EBOV',
-    'KC242793': 'EBOV',
-    'KC242794': 'EBOV',
-    'AY354458': 'EBOV',
-    'KC242796': 'EBOV',
-    'KC242799': 'EBOV',
-    'KC242784': 'EBOV',
-    'KC242786': 'EBOV',
-    'KC242787': 'EBOV',
-    'KC242789': 'EBOV',
-    'KC242785': 'EBOV',
-    'KC242790': 'EBOV',
-    'KC242788': 'EBOV',
-    'KC242800': 'EBOV',
-    'KM034555': 'EBOV',
-    'KM034562': 'EBOV',
-    'KM233039': 'EBOV',
-    'KM034557': 'EBOV',
-    'KM034560': 'EBOV',
-    'KM233050': 'EBOV',
-    'KM233053': 'EBOV',
-    'KM233057': 'EBOV',
-    'KM233063': 'EBOV',
-    'KM233072': 'EBOV',
-    'KM233110': 'EBOV',
-    'KM233070': 'EBOV',
-    'KM233099': 'EBOV',
-    'KM233097': 'EBOV',
-    'KM233109': 'EBOV',
-    'KM233096': 'EBOV',
-    'KM233103': 'EBOV',
-    'KJ660346': 'EBOV',
-    'KJ660347': 'EBOV',
-    'KJ660348': 'EBOV',
-}
+# 设置 CSV 文件路径
+input_file = "ebolavirus_record.csv"
+output_file = "label_gene_origin.txt"
+
+# 读取 CSV 文件，从第二行开始，提取第2列和第4列
+df = pd.read_csv(input_file, header=0, usecols=[1, 4])
+
+# 构建标签字典
+label_gene_origin = {}
+for index, row in df.iterrows():
+    gene_id = row[0]  # 第2列数据（基因ID）
+    label = row[1]    # 第4列数据（标签）
+    label_gene_origin[gene_id] = label
 
 
 
