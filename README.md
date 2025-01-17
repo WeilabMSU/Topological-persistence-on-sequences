@@ -19,7 +19,7 @@ This repository contains code for extracting topological features from DNA seque
    - Betti numbers (dimensions 0, 1, 2, and 3)
    - The smallest positive eigenvalues as functions of the frequency parameter for each virus.
    
-Performs clustering analysis using the extracted topological features. Viruses belonging to the same family are visually distinguished with the same color.
+   Performs clustering analysis using the extracted topological features. Viruses belonging to the same family are visually distinguished with the same color.
 
 ## Usage
 
