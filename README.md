@@ -22,5 +22,4 @@ This repository contains code for extracting topological features from DNA seque
 
 ## Usage
 
-1. Follow the instructions provided in each script to extract and analyze the topological features of the given DNA sequences.  
-2. The results provide insights into the structural and topological properties of the viruses, facilitating their classification and clustering.
+Follow the instructions provided in each script to extract and analyze the topological features of the given DNA sequences.  
